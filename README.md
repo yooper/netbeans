@@ -1,5 +1,6 @@
 # Docker-based Netbeans
 * NetBeans v8.2 in a Docker container
+* Java 8 (1.8.0_141) JDK + Maven 3.5.0 + Python 3.5.2 + X11 (display GUI)
 
 ## Requirements
 * Docker 1.13.1+ 
@@ -14,6 +15,11 @@
 ```
 ./run.sh
 ```
+
+## Configuration
+The docker container will assume there is a default /workspace folder. Be default, './run.sh', will use/create the local folder, "$HOME/data_docker/netbeans" to map into the docker's internal "/workspace" folder.
+
+The above approach will ensure all your projects created in the container's "/workspace" folder is "persistent" in your local folder, i.e., "$HOME/data_docker/netbeans/workspace"
 
 ## Making plugins persist between sessions
 
