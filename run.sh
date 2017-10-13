@@ -31,7 +31,7 @@ PACKAGE=`echo ${imageTag##*/}|tr "/\-: " "_"`
 
 docker_volume_data1=/home/developer/.netbeans
 docker_volume_data2=/home/developer/workspace
-local_docker_data1=${baseDataFolder}/${PACKAGE}/.netbeans-docker
+local_docker_data1=${baseDataFolder}/${PACKAGE}/.netbeans
 local_docker_data2=${baseDataFolder}/${PACKAGE}/workspace
 
 #### ---- local data folders on the host ----
@@ -59,7 +59,7 @@ echo "---------------------------------------------"
 echo "---- Starting a Container for ${imageTag}"
 echo "---------------------------------------------"
 DISPLAY=${MY_IP}:0 \
-docker run -ti --rm \
+docker run -ti \
     --name=${instanceName} \
     -e DISPLAY=$DISPLAY \
     -v /tmp/.X11-unix:/tmp/.X11-unix \

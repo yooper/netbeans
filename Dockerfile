@@ -14,15 +14,10 @@ ENV USER_ID=${USER_ID}
 ARG GROUP_ID=${GROUP_ID:-1000}
 ENV GROUP_ID=${GROUP_ID}
     
-## ---- Ubuntu ----
+## ---- X11 ----
 RUN apt-get update && \
     apt-get install -y xauth xorg openbox && \
     apt-get install -y libxext-dev libxrender-dev libxtst-dev  firefox
-
-RUN export DISPLAY=${DISPLAY} && \
-    wget -c http://download.netbeans.org/netbeans/${NETBEAN_VER}/final/bundles/netbeans-${NETBEAN_VER}-linux.sh && \
-    chmod +x netbeans-${NETBEAN_VER}-linux.sh && \
-    ./netbeans-${NETBEAN_VER}-linux.sh --silent 
 
 RUN export DISPLAY=${DISPLAY} && \
     useradd developer && \
@@ -36,6 +31,11 @@ RUN export DISPLAY=${DISPLAY} && \
     chmod 0440 /etc/sudoers.d/developer && \
     chown developer:developer -R /home/developer
     
+## ---- Netbeans ----
+RUN wget -c http://download.netbeans.org/netbeans/${NETBEAN_VER}/final/bundles/netbeans-${NETBEAN_VER}-linux.sh && \
+    chmod +x netbeans-${NETBEAN_VER}-linux.sh && \
+    ./netbeans-${NETBEAN_VER}-linux.sh --silent 
+
 RUN apt-get clean all && \
     ls /usr/local/ && \
     rm -rf netbeans*
